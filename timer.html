@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<div>
+  <h3>Timer</h3>
+  <p>Click on the "Start count!" button above to start the timer. The input field will start counting the seconds, from 0. Click on the "Stop count!" button to stop or pause the counting. Click the Reset count to reset the counting. Click on the "Start count!" button to start the timer again.</p>
+  <button id="start" onclick="startCount()">Start count!</button>
+  <input type="text" id="txt">
+  <button id="stop" onclick="stopCount()">Stop count!</button>
+  <button onclick="resetCount()">Reset count!</button>
+</div>
+
+<style type="text/css">
+  h3{
+    background-color: lightblue;
+    padding: 10px 10px 10px 10px;
+  }
+  div{
+    width: 40%;
+    border: 1px solid lightgrey;
+    padding: 0px 10px 10px 10px;
+  }
+  button{
+    font-size: 16px;
+  }
+  input{
+    font-size: 14px;
+  }
+</style>
+
+
+
+<script>
+var c = 0;
+var t;
+var timer_is_on = 0;
+
+function timedCount() {
+  document.getElementById("txt").value = c;
+  c = c + 1;
+  t = setTimeout(timedCount, 1000);
+}
+
+function startCount() {
+  if (!timer_is_on) {
+    timer_is_on = 1;
+    timedCount();
+    document.getElementById("start").innerHTML = "Started";
+    document.getElementById("stop").innerHTML = "Stop";
+  }
+}
+
+function stopCount() {
+  clearTimeout(t);
+  timer_is_on = 0;
+  document.getElementById("stop").innerHTML = "Stopped/paused";
+  document.getElementById("start").innerHTML = "Resume";
+}
+
+function resetCount() {
+  document.getElementById("txt").value = 0;
+  c = 0;
+  timer_is_on = 0;
+  document.getElementById("start").innerHTML = "Start";
+  document.getElementById("stop").innerHTML = "Stop";
+}
+</script>
+
+</body>
+</html>
